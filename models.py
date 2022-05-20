@@ -35,7 +35,7 @@ class HueyExecutionLog(models.Model):
     @classmethod
     def task_to_string(cls, task_class):
         """Return the string representation of a function."""
-        return "{}.{}".format(task_class.__module__, task_class.__name__)
+        return f"{task_class.__module__}.{task_class.__name__}"
 
     @classmethod
     def logs(
@@ -101,10 +101,8 @@ class HueyExecutionLog(models.Model):
                 delta_minutes = abs((dt_a - dt_b).total_seconds()) / 60.0
                 if delta_minutes <= minutes_tolerance:
                     raise ValueError(
-                        "Is not possible have hours with less than {} minutes "
-                        "of distance. Incompatible hours: {} and {}".format(
-                            delta_minutes, dt_a, dt_b
-                        )
+                        f"Is not possible have hours with less than {delta_minutes} minutes "
+                        "of distance. Incompatible hours: {dt_a} and {dt_b}"
                     )
 
     @classmethod
